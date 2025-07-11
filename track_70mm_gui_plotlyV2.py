@@ -145,9 +145,14 @@ while True:
         x_window = frames[-LIVE_WINDOW:]
         y_window = raw_mm[-LIVE_WINDOW:]
         with fig_live.batch_update():
-            trace.x = x_window
-            trace.y = y_window
-            fig_live.layout.xaxis.range = [x_window[0], x_window[-1]+1]
+    trace.x = x_window
+    trace.y = y_window
+    fig_live.layout.xaxis.range = [x_window[0], x_window[-1] + 1]
+
+    ymin = np.min(y_window)
+    ymax = np.max(y_window)
+    padding = 0.25
+    fig_live.layout.yaxis.range = [ymin - padding, ymax + padding]
 
 cap.release(); writer.release()
 
